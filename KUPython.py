@@ -1,18 +1,4 @@
-#########################################################################
-#                                                                       #
-#   KUPython is a module intended to help building                      #
-#   applications for KU's Absalon in Python                             #
-#                                                                       #
-#   In order for KUPython to work Requests need to be                   #
-#   installed.                                                          #
-#                                                                       #
-#   link to install Requests:                                           #
-#   http://docs.python-requests.org/en/latest/user/installed            #
-#                                                                       #
-#                                                                       #
-#                                                                       #
-#                                                                       #
-#########################################################################
+
 
 import requests
 import re
@@ -70,11 +56,14 @@ class absalonSession:
 
 	def getassignmentsfolder(self, coursefolder):
 		# given a coursefolder it finds the assignment folder in it
-		return None
+		folderlist = re.findall('(?<=FolderID=)[0-9]+', coursefolder.text.encode('utf-8'))
+		for ID in folderlist: 
+			if len(self.getassignmentids(ID)) > 0: 
+				return ID
 
 	def getassignmentids(self, 
 		FolderID): 
-		# Given a FolderID getassignmentids looks up EssayID which is essentially to get 
+		# Given a FolderID looks up EssayID which is essentially to get 
 		# pages of each specific assignment for the course. 
 
 		params = {'FolderID' : FolderID}
