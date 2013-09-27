@@ -27,7 +27,7 @@ link to install Requests:
   - Example to test for assignments from all courses
 
             def getstatus():
-                newsession = assignments.assignment(user, passw)
+                newsession = assignments(user, passw)
             
                 result = "" 
                 for folder in newsession.assignmentfolders:
