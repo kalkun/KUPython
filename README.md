@@ -6,7 +6,7 @@
 KUPython is a small Python module intended to help easily build scripts or small 
 applications for KU's studentnet Absalon.
 
-In order for KUPython to work Requests need to be installed.
+In order for KUPython to work the Requests Library need to be installed.
 
 link to install Requests:                                           
 <http://docs.python-requests.org/en/latest/user/install/>
