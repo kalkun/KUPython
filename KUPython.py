@@ -101,11 +101,11 @@ class absalonSession:
 
 	def dump(page, responseobject=True, override=True, file='dump.html'):
 		""" Dump page or text to a file
-			the page parameter specifies what is to be written to the file
-		 	if what is to be dumped is not a responseobject then pass responseobject=False 
-		 	by default dump() writes to 'dump.html' pass any other filename to dump to another
-		 	folder. 
-		 	override can be set to False to not override what is already in file"""
+            the page parameter specifies what is to be written to the file
+            if what is to be dumped is not a responseobject then pass responseobject=False 
+            by default dump() writes to 'dump.html' pass any other filename to dump to another
+            folder. 
+            override can be set to False to not override what is already in file """
 		if override == True:
 			dump = open('dump.html', 'w')
 		else: 
