@@ -14,7 +14,7 @@ link to install Requests:
 #########################################################################
 
 - Get started: 
-  > Start a new session with the absalonSession class. Example:
+  - Start a new session with the absalonSession class. Example:
     
         from KUPython import absalonSession, assignments
         
@@ -24,7 +24,7 @@ link to install Requests:
         kusession = absalonSession(user, passw)
 
 - Test status for assigments.
-  > Example to test for assignments from all courses
+  - Example to test for assignments from all courses
 
         def getstatus():
             newsession = assignments.assignment(user, passw)
@@ -34,9 +34,9 @@ link to install Requests:
                 result += assigns.checkassignments(folder)
             return result
       
-  > Since the result from getstatus will be html formatted it can just be dumped to a file. 
+  - Since the result from getstatus will be html formatted it can just be dumped to a file. 
   
-        def dump(html)
+        def dump(html):
             dump = open('result.html', 'w')
             dump.write(html)
             dump.close()
