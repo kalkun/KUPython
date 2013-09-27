@@ -51,7 +51,7 @@ class absalonSession:
 
 	def coursefolder(self, 
 		courseID, navigate=True):
-		""" Given a course ID coursefolder returns the course folder as a request.response object 
+		""" Given a course ID coursefolder returns the course folder as a requests.response object 
 			by default. Returns the Folder ID if navigate is set to False"""
 		
 		#bind parameters
