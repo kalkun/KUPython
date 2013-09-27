@@ -3,8 +3,8 @@
 #   KUPython                                                            #
 #                                                                       #
 #########################################################################
-KUPython is a Python module intended to help building applications 
-for KU's studentnet Absalon.
+KUPython is a small Python module intended to help easily build scripts or small 
+applications for KU's studentnet Absalon.
 
 In order for KUPython to work Requests need to be installed.
 
