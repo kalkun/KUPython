@@ -29,10 +29,10 @@ link to install Requests:
             def getstatus():
                 newsession = assignments(user, passw)
             
-                result = "" 
+                status = "" 
                 for folder in newsession.assignmentfolders:
                     result += newsession.checkassignments(folder)
-                return result
+                return status
       
     - Since the result from getstatus will be html formatted it can just be dumped to a file. 
   
