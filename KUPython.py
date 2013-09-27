@@ -54,7 +54,7 @@ class absalonSession:
 
 	def coursefolder(self, 
 		courseID, navigate=True):
-		""" Given a course ID coursefolder returns the course folder as a request.response object 
+		""" Given a course ID coursefolder returns the course folder as a requests.response object 
 			by default. Returns the Folder ID if navigate is set to False"""
 		
 		#bind parameters
@@ -74,3 +74,20 @@ class absalonSession:
 			folder = self.session.request('GET', 'https://absalon.itslearning.com/Folder/processfolder.aspx', params)
 
 			return folder
+
+	def dump(page, responseobject=True, override=True, file='dump.html'):
+		""" Dump page or text to a file
+            the page parameter specifies what is to be written to the file
+            if what is to be dumped is not a responseobject then pass responseobject=False 
+            by default dump() writes to 'dump.html' pass any other filename to dump to another
+            folder. 
+            override can be set to False to not override what is already in file """
+		if override == True:
+			dump = open('dump.html', 'w')
+		else: 
+			dump = open('dump.html', 'a')
+		if responseobject == True:
+			dump.write(page.text.encode('utf-8'))
+		else:
+			dump.write(page)
+		dump.close()
