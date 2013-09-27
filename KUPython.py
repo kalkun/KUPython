@@ -50,8 +50,9 @@ class absalonSession:
 		self.courses = re.findall('(?<=CourseID=)[0-9]+', tmp.text.encode('utf-8'))
 
 	def coursefolder(self, 
-		courseID):
-		""" Given a course ID coursefolder returns the course folder as a request.response object """
+		courseID, navigate=True):
+		""" Given a course ID coursefolder returns the course folder as a request.response object 
+			by default. Returns the Folder ID if navigate is set to False"""
 		
 		#bind parameters
 		params = {'CourseID' : courseID}
@@ -59,45 +60,17 @@ class absalonSession:
 		# execute GET
 		page = self.session.request('GET', "https://absalon.itslearning.com/main.aspx", params=params).text.encode('utf-8')
 
-		#search for the course Folder ID and bind it to params
-		params = { 'FolderID' : re.search('(?<=FolderID=)[0-9]+', page).group() }
-		
-		folder = self.session.request('GET', 'https://absalon.itslearning.com/Folder/processfolder.aspx', params)
+		#search for the course Folder ID 
+		folderID = re.search('(?<=FolderID=)[0-9]+', page).group()
+		if navigate == False: 
+			return folderID	
 
-		return folder
+		else: 
+			# and bind it to params
+			params = { 'FolderID' : folderID }
+			folder = self.session.request('GET', 'https://absalon.itslearning.com/Folder/processfolder.aspx', params)
 
-	def getassignmentsfolder(self, coursefolder):
-		""" given a coursefolder getassignmentsfolder() returns the FolderID of the assignment folder """
-
-		folderlist = re.findall('(?<=FolderID=)[0-9]+', coursefolder.text.encode('utf-8'))
-		for ID in folderlist: 
-			if len(self.getassignmentids(ID)) > 0: 
-				return ID
-
-	def getassignmentids(self, 
-		FolderID): 
-		"""	Given a FolderID getassignmentids() returns a list of assignment IDs for the 
-			assignments associated with the course that the folder belongs to. """
-
-		params = {'FolderID' : FolderID}
-		overview = self.session.request("GET", "https://absalon.itslearning.com/Folder/processfolder.aspx", params=params)
-		
-		return re.findall('(?<=EssayID=)[0-9]+', overview.text.encode('utf-8'))
-
-	def checkassignments(self,
-		folderid):
-		""" given an assignment folder checkassignments returns a list of the assignments statuses """
-
-		folderlist = self.getassignmentids(folderid)
-		allStatus = []
-		for assigns in folderlist:
-			params = {'EssayID' : assigns}
-			lookup = self.session.request("GET", "https://absalon.itslearning.com/essay/read_essay.aspx", params=params)
-			status = re.search('(?<=<th>Status</th>\r\n\t\t\t\t).*?</td>', lookup.text.encode('utf-8'), flags=re.DOTALL)
-			if status != None:
-				allStatus.extend([status.group()])
-			#status = re.search('(?<=<th>Status</th>)^<td>$</td>', check)
-		return allStatus
+			return folder
 
 	def dump(page, responseobject=True, override=True, file='dump.html'):
 		""" Dump page or text to a file
@@ -115,5 +88,3 @@ class absalonSession:
 		else:
 			dump.write(page)
 		dump.close()
-
-
