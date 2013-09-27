@@ -87,21 +87,21 @@ class absalonSession:
 			#status = re.search('(?<=<th>Status</th>)^<td>$</td>', check)
 		return allStatus
 
-		def dump(page, responseobject=True, override=True, file='dump.html'):
-			""" Dump page or text to a file
-				the page parameter specifies what is to be written to the file
-			 	if what is to be dumped is not a responseobject then pass responseobject=False 
-			 	by default dump() writes to 'dump.html' pass any other filename to dump to another
-			 	folder. 
-			 	override can be set to False to not override what is already in file"""
-			if override == True:
-				dump = open('dump.html', 'w')
-			else: 
-				dump = open('dump.html', 'a')
-			if responseobject == True:
-				dump.write(page.text.encode('utf-8'))
-			else:
-				dump.write(page)
-			dump.close()
+	def dump(page, responseobject=True, override=True, file='dump.html'):
+		""" Dump page or text to a file
+			the page parameter specifies what is to be written to the file
+		 	if what is to be dumped is not a responseobject then pass responseobject=False 
+		 	by default dump() writes to 'dump.html' pass any other filename to dump to another
+		 	folder. 
+		 	override can be set to False to not override what is already in file"""
+		if override == True:
+			dump = open('dump.html', 'w')
+		else: 
+			dump = open('dump.html', 'a')
+		if responseobject == True:
+			dump.write(page.text.encode('utf-8'))
+		else:
+			dump.write(page)
+		dump.close()
 
 
