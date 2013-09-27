@@ -23,7 +23,7 @@ link to install Requests:
             
             kusession = absalonSession(user, passw)
 
-- Test status for assigments.
+- Test status for assignments.
   - Example to test for assignments from all courses
 
             def getstatus():
