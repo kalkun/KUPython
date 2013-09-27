@@ -35,8 +35,6 @@ class absalonSession:
 		# self.courses is a list of course IDS for the current user
 		self.courses = re.findall('(?<=CourseID=)[0-9]+', tmp.text.encode('utf-8'))
 
-		self.coursefolders = {}
-
 	def coursefolder(self, 
 		courseID):
 		""" Given a course ID coursefolder returns the course folder as a request.response object """
@@ -65,7 +63,7 @@ class absalonSession:
 	def getassignmentids(self, 
 		FolderID): 
 		"""	Given a FolderID getassignmentids() returns a list of assignment IDs for the 
-			assignments associated with the course. """
+			assignments associated with the course that the folder belongs to. """
 
 		params = {'FolderID' : FolderID}
 		overview = self.session.request("GET", "https://absalon.itslearning.com/Folder/processfolder.aspx", params=params)
