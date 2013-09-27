@@ -31,7 +31,7 @@ link to install Requests:
             
                 result = "" 
                 for folder in newsession.assignmentfolders:
-                    result += assigns.checkassignments(folder)
+                    result += newsession.checkassignments(folder)
                 return result
       
     - Since the result from getstatus will be html formatted it can just be dumped to a file. 
