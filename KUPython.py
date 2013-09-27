@@ -49,6 +49,9 @@ class absalonSession:
 		# self.courses is a list of course IDS for the current user
 		self.courses = re.findall('(?<=CourseID=)[0-9]+', tmp.text.encode('utf-8'))
 
+		# Get a list of coursefolders IDs. One from each course
+		self.coursefolders = [self.coursefolder(courseID) for courseID in self.courses]
+
 	def coursefolder(self, 
 		courseID, navigate=True):
 		""" Given a course ID coursefolder returns the course folder as a request.response object 
@@ -71,20 +74,3 @@ class absalonSession:
 			folder = self.session.request('GET', 'https://absalon.itslearning.com/Folder/processfolder.aspx', params)
 
 			return folder
-
-	def dump(page, responseobject=True, override=True, file='dump.html'):
-		""" Dump page or text to a file
-            the page parameter specifies what is to be written to the file
-            if what is to be dumped is not a responseobject then pass responseobject=False 
-            by default dump() writes to 'dump.html' pass any other filename to dump to another
-            folder. 
-            override can be set to False to not override what is already in file """
-		if override == True:
-			dump = open('dump.html', 'w')
-		else: 
-			dump = open('dump.html', 'a')
-		if responseobject == True:
-			dump.write(page.text.encode('utf-8'))
-		else:
-			dump.write(page)
-		dump.close()

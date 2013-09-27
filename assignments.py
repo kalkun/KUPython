@@ -11,8 +11,8 @@ class assignments(absalonSession):
 		# start absalon session
 		absalonSession.__init__(self, user, passw)
 
-    	# Get a list of coursefolders one from each course
-		self.coursefolders = [self.coursefolder(courseID, navigate=False) for courseID in self.courses]
+		# get FolderID of the assignment folders for each course
+		self.assignmentfolders = [self.getassignmentsfolder(coursefolder) for coursefolder in self.coursefolders]
 
 	def getassignmentsfolder(self, coursefolder):
 		""" given a coursefolder getassignmentsfolder() returns the FolderID of the assignment folder """
@@ -37,12 +37,17 @@ class assignments(absalonSession):
 
 		folderlist = self.getassignmentids(FolderID)
 		# go through all EssayIDs in folderlist and collect status for each assignment
-		# then puts the status into allStatus and returns the allStatus list of assignment statuses
-		allStatus = []
+		# then puts the status into allStatus and returns the allStatus as HTML of assignment statuses
+		allStatus = ""
 		for assigns in folderlist:
 			params = {'EssayID' : assigns}
 			lookup = self.session.request("GET", "https://absalon.itslearning.com/essay/read_essay.aspx", params=params)
 			status = re.search('(?<=<th>Status</th>\r\n\t\t\t\t).*?</td>', lookup.text.encode('utf-8'), flags=re.DOTALL)
 			if status != None:
-				allStatus.extend([status.group()])
+				allStatus += '<br>'
+				allStatus += status.group()
 		return allStatus
+
+
+
+		
