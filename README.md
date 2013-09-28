@@ -16,7 +16,8 @@ link to install Requests:
 - Get started: 
     - Start a new session with the absalonSession class. Example:
       
-            from KUPython import absalonSession, assignments
+            from KUPython import absalonSession
+            from assignments import assignments
             
             user = <username>
             passw = <password>
