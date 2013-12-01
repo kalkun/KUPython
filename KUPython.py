@@ -1,7 +1,7 @@
 #########################################################################
 #                                                                       #
 #   KUPython is a module intended to help building                      #
-#   scripts for KU's Absalon in Python                             	#
+#   scripts for KU's Absalon in Python                                  #
 #                                                                       #
 #   In order for KUPython to work Requests need to be                   #
 #   installed.                                                          #
